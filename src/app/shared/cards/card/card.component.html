@@ -1,0 +1,58 @@
+<div class="">
+  @if (actors.length>0) {
+    <mat-card appearance="outlined">
+      @for (actor of actors; track $index) {
+        <img mat-card-image [src]="actor.images[0]">
+        <mat-card-header>
+          <mat-card-title>{{actor.name}}</mat-card-title>
+          <mat-card-subtitle>{{actor.birthDate}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-fab [routerLink]=""> <!--enviar a info del actor-->
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          @if (admin) {
+            <button mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
+              <mat-icon>edit_note</mat-icon>
+            </button>
+            <button mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </mat-card-content>
+      }
+    </mat-card>
+  } @else if (movies.length>0) {
+    <mat-card appearance="outlined">
+      @for (movie of movies; track $index) {
+        <img mat-card-image [src]="movie.images[0]">
+        <mat-card-header>
+          <mat-card-title>{{movie.rating}}</mat-card-title>
+          <mat-card-subtitle>{{movie.genre}}</mat-card-subtitle>
+          <mat-card-subtitle>{{movie.releaseYear}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-fab [routerLink]=""> <!--enviar a info de la pelicula-->
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          @if (admin) {
+            <button mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
+              <mat-icon>edit_note</mat-icon>
+            </button>
+            <button mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </mat-card-content>
+      }
+    </mat-card>
+  }@else {
+    <div class="">
+      <mat-spinner></mat-spinner>
+      <p>Cargando...</p>
+    </div>
+  }
+</div>
+
+
+
