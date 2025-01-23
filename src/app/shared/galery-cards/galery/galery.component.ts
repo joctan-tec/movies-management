@@ -6,7 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-galery',
+  selector: 'shared-galery',
   imports: [CardComponent, PaginatorComponent,MatProgressSpinner],
   templateUrl: './galery.component.html',
   styleUrl: './galery.component.scss'
