@@ -1,1 +1,26 @@
-<p>galery works!</p>
+<div>
+  @if (movies.length>0) {
+    @for (movie of movies; track $index) {
+      <shared-card [movie]="movie" [admin]="admin"></shared-card>
+      <shared-paginator
+        [totalItems]="movies.length"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      ></shared-paginator>
+    }
+  }@else if (actors.length>0) {
+    @for (actor of actors; track $index) {
+      <shared-card [actor]="actor" [admin]="admin"></shared-card>
+      <shared-paginator
+        [totalItems]="actors.length"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      ></shared-paginator>
+    }
+  }@else {
+    <div class="">
+      <mat-spinner></mat-spinner>
+      <p>Cargando...</p>
+    </div>
+  }
+</div>

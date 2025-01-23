@@ -15,10 +15,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export class CardComponent {
 
   @Input()
-  public movies:Movie[]=[];
+  public movie!:Movie;
 
   @Input()
-  public actors:Actor[]=[];
+  public actor!:Actor;
 
   @Input()
   public admin:Boolean=false;
