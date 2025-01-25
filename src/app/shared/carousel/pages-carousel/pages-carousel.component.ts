@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { CardComponent } from "../../cards/card/card.component";
+import { Actor } from '../../../movies/interfaces/models.interfaces';
 
 @Component({
   selector: 'shared-pages-carousel',
@@ -13,6 +14,9 @@ export class PagesCarouselComponent {
 
   slides: any[] = new Array(3).fill({ id: -1, src: '', title: '', subtitle: '' });
   responsiveOptions: any[] | undefined;
+
+  @Input()
+  actors:Actor[]=[];
   //todo llamar a traer todos los datos de los actores
 
   ngOnInit(): void {

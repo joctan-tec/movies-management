@@ -1,18 +1,21 @@
 export interface Movie {
-  title: string;
-  description: string;
-  genre: string;
-  director: string;
-  cast: string[];
-  releaseYear: Date;
-  rating: number;
-  images: string[];
+  titulo: string;            // "titulo"
+  descripcion: string;      // "descripcion"
+  genero: string;           // "genero"
+  director: string;         // "director"
+  reparto: string[];        // "reparto"
+  ano_lanzamiento: number;  // "ano_lanzamiento" (lo convertimos a number para el año)
+  calificacion: number;     // "calificacion"
+  imagenes: string[];       // "imagenes"
+  activo: boolean;          // "activo"
 }
 
 export interface Actor {
-  name: string;
-  birthDate: Date;
-  biography: string;
-  images: string[];
-  movies: string[];
+  nombre: string;           // "nombre"
+  fecha_nacimiento: Date;   // "fecha_nacimiento" (lo mantenemos como Date)
+  biografia: string;        // "biografia"
+  imagenes: { url: string, activo: boolean }[]; // "imagenes" con 'url' y 'activo'
+  peliculas: string[];      // "peliculas"
+  activo: boolean;          // "activo"
+  id: string;               // "id"
 }

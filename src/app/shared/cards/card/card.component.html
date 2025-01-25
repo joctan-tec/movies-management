@@ -1,14 +1,15 @@
 <div class="">
   @if (actor) {
     <mat-card appearance="outlined">
-      <img mat-card-image [src]="actor.images[0]">
+      <!--<img mat-card-image [src]="actor.images[0]">-->
       <mat-card-header>
-        <mat-card-title>{{actor.name}}</mat-card-title>
-        <mat-card-subtitle>{{actor.birthDate}}</mat-card-subtitle>
+        <mat-card-title>{{actor.nombre}}</mat-card-title>
+        <mat-card-subtitle>{{actor.fecha_nacimiento}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <button mat-fab [routerLink]=""> <!--enviar a info del actor-->
+        <button mat-fab extended [routerLink]=""> <!--enviar a info del actor-->
           <mat-icon>more_horiz</mat-icon>
+          More info
         </button>
         @if (admin) {
           <button mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
@@ -23,11 +24,11 @@
   } @else if (movie) {
     <mat-card appearance="outlined">
 
-      <img mat-card-image [src]="movie.images[0]">
+      <!--<img mat-card-image [src]="movie.images[0]">-->
       <mat-card-header>
-        <mat-card-title>{{movie.rating}}</mat-card-title>
-        <mat-card-subtitle>{{movie.genre}}</mat-card-subtitle>
-        <mat-card-subtitle>{{movie.releaseYear}}</mat-card-subtitle>
+        <mat-card-title>{{movie.calificacion}}</mat-card-title>
+        <mat-card-subtitle>{{movie.genero}}</mat-card-subtitle>
+        <mat-card-subtitle>{{movie.ano_lanzamiento}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <button mat-fab [routerLink]=""> <!--enviar a info de la pelicula-->

@@ -1,27 +1,34 @@
-<div>
-  @if (movies.length>0) {
-    @for (movie of movies; track $index) {
+<div *ngIf="movies.length > 0">
+  <div class="grid grid-cols-3">
+    <ng-container *ngFor="let movie of paginatedMovies">
       <shared-card [movie]="movie" [admin]="admin"></shared-card>
-      <shared-paginator
-        [totalItems]="movies.length"
-        [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)"
-      ></shared-paginator>
-    }
-  }@else if (actors.length>0) {
-    @for (actor of actors; track $index) {
-      <shared-card [actor]="actor" [admin]="admin"></shared-card>
-      <shared-paginator
-        [totalItems]="actors.length"
-        [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)"
-      ></shared-paginator>
-    }
-  }@else {
-    <div class="">
-      <mat-spinner></mat-spinner>
-      <p>Cargando...</p>
-    </div>
+    </ng-container>
+  </div>
 
-  }
+  <shared-paginator
+    [totalItems]="movies.length"
+    [pageSize]="pageSize"
+    (pageChange)="onPageChangeMovies($event)"
+  ></shared-paginator>
 </div>
+
+<div *ngIf="actors.length > 0">
+  <div class="grid grid-cols-3">
+    <ng-container *ngFor="let actor of paginatedActors">
+      <shared-card [actor]="actor" [admin]="admin"></shared-card>
+    </ng-container>
+  </div>
+
+  <shared-paginator
+    [totalItems]="actors.length"
+    [pageSize]="pageSize"
+    (pageChange)="onPageChangeActors($event)"
+  ></shared-paginator>
+</div>
+
+<ng-template #loading>
+  <div class="">
+    <mat-spinner></mat-spinner>
+    <p>Cargando...</p>
+  </div>
+</ng-template>
