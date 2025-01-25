@@ -1,0 +1,20 @@
+/* Reducir espacio entre las slides */
+::ng-deep .p-carousel .p-carousel-item {
+  padding: 0 5px; /* Ajusta el espacio entre cada card dentro de la diapositiva */
+}
+
+/* Reducir márgenes y padding del contenedor del carrusel */
+::ng-deep .p-carousel .p-carousel-content {
+  margin: 0; /* Elimina márgenes internos */
+  padding: 0; /* Elimina el padding por defecto */
+  gap: 10px; /* Reduce el espacio entre las tarjetas dentro del carrusel */
+}
+
+/* Reducir el espacio alrededor de cada tarjeta */
+::ng-deep .shared-card {
+  width: 100%; /* Asegúrate de que las tarjetas ocupen todo el espacio disponible */
+  max-width: 250px; /* Limita el tamaño de las tarjetas si es necesario */
+  margin: auto; /* Centra las tarjetas en el carrusel */
+  /* Si deseas un espacio entre las tarjetas, puedes poner margen aquí */
+  margin-right: 8px;
+}

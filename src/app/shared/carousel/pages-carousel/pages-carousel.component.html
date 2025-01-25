@@ -1,7 +1,30 @@
-<div class="flex justify-center justify-items-center">
-  <p-carousel [value]="slides" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
-      <ng-template let-product #item>
-          <shared-card></shared-card>
+<div class="">
+  <!-- Carrusel de Actores -->
+  <div class="carousel-container">
+    <p-carousel *ngIf="actors.length > 0"
+                [value]="actors"
+                [numVisible]="3"
+                [numScroll]="3"
+                [circular]="false"
+                [responsiveOptions]="responsiveOptions">
+      <ng-template pTemplate="item" let-actor>
+        <!-- Renderiza cada tarjeta de actor -->
+        <shared-card class="shared-card" [actor]="actor"></shared-card>
       </ng-template>
+    </p-carousel>
+  </div>
+
+
+  <!-- Carrusel de Películas -->
+  <p-carousel *ngIf="movies.length > 0"
+              [value]="movies"
+              [numVisible]="3"
+              [numScroll]="3"
+              [circular]="false"
+              [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="item" let-movie>
+      <!-- Aquí se renderiza cada tarjeta de película -->
+      <shared-card [movie]="movie"></shared-card>
+    </ng-template>
   </p-carousel>
 </div>

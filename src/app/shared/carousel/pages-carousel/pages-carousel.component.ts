@@ -1,69 +1,46 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { CardComponent } from "../../cards/card/card.component";
-import { Actor } from '../../../movies/interfaces/models.interfaces';
+import { Actor, Movie } from '../../../movies/interfaces/models.interfaces';
 
 @Component({
   selector: 'shared-pages-carousel',
+  standalone: true,
   imports: [CommonModule, CarouselModule, CardComponent],
   templateUrl: './pages-carousel.component.html',
-  styleUrl: './pages-carousel.component.scss'
+  styleUrls: ['./pages-carousel.component.scss']
 })
 export class PagesCarouselComponent {
+  @Input() actors: Actor[] = []; // Lista completa de actores
+  @Input() movies: Movie[] = []; // Lista completa de películas
 
-  slides: any[] = new Array(3).fill({ id: -1, src: '', title: '', subtitle: '' });
-  responsiveOptions: any[] | undefined;
+  responsiveOptions: any[] = []; // Opciones del carrusel para diferentes tamaños de pantalla
 
-  @Input()
-  actors:Actor[]=[];
-  //todo llamar a traer todos los datos de los actores
-
-  ngOnInit(): void {
-
+  constructor() {
+    // Configuración del carrusel
     this.responsiveOptions = [
       {
-          breakpoint: '1400px',
-          numVisible: 2,
-          numScroll: 1
+        breakpoint: '1400px',
+        numVisible: 3, // Mostrar 3 elementos visibles
+        numScroll: 3   // Avanzar de 3 en 3
       },
       {
-          breakpoint: '1199px',
-          numVisible: 3,
-          numScroll: 1
+        breakpoint: '1199px',
+        numVisible: 3,
+        numScroll: 3
       },
       {
-          breakpoint: '767px',
-          numVisible: 2,
-          numScroll: 1
+        breakpoint: '767px',
+        numVisible: 2, // Mostrar 2 elementos visibles en pantallas pequeñas
+        numScroll: 2   // Avanzar de 2 en 2
       },
       {
-          breakpoint: '575px',
-          numVisible: 1,
-          numScroll: 1
+        breakpoint: '575px',
+        numVisible: 1, // Mostrar 1 elemento visible en pantallas muy pequeñas
+        numScroll: 1   // Avanzar de 1 en 1
       }
-  ]
-
-
-
-    this.slides[0] = {
-      id: 0,
-      src: './assets/img/angular.jpg',
-      title: 'First slide',
-      subtitle: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-    };
-    this.slides[1] = {
-      id: 1,
-      src: './assets/img/react.jpg',
-      title: 'Second slide',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    };
-    this.slides[2] = {
-      id: 2,
-      src: './assets/img/vue.jpg',
-      title: 'Third slide',
-      subtitle: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
-    };
+    ];
   }
 
 }
