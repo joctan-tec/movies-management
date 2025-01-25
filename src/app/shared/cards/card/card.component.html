@@ -1,4 +1,4 @@
-<div class="">
+<div>
   @if (actor) {
     <mat-card appearance="outlined">
       <!--<img mat-card-image [src]="actor.images[0]">-->
@@ -7,15 +7,15 @@
         <mat-card-subtitle>{{actor.fecha_nacimiento}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <button mat-fab extended [routerLink]=""> <!--enviar a info del actor-->
+        <button class="buttonInfo" mat-fab extended [routerLink]="['/main',actor.nombre]"> <!--enviar a info del actor-->
           <mat-icon>more_horiz</mat-icon>
           Info
         </button>
         @if (admin) {
-          <button mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
+          <button class="" mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
             <mat-icon>edit_note</mat-icon>
           </button>
-          <button mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
+          <button class=""  mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
             <mat-icon>delete</mat-icon>
           </button>
         }
@@ -31,15 +31,15 @@
         <mat-card-subtitle>{{movie.ano_lanzamiento}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <button mat-fab extended [routerLink]=""> <!--enviar a info de la movie-->
+        <button class="" mat-fab extended [routerLink]=""> <!--enviar a info de la movie-->
           <mat-icon>more_horiz</mat-icon>
           Info
         </button>
         @if (admin) {
-          <button mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
+          <button class=""  mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
             <mat-icon>edit_note</mat-icon>
           </button>
-          <button mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
+          <button class="" mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
             <mat-icon>delete</mat-icon>
           </button>
         }

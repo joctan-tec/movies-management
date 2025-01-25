@@ -19,4 +19,8 @@ export class ActorService {
   getAllActors():Observable<Actor[]>{
     return this.http.get<Actor[]>(`${this.url}/api/actors`)
   }
+
+  getActor(name:string):Observable<Actor>{
+    return this.http.get<Actor>(`${this.url}/api/actors/getOne/${name}`)
+  }
 }

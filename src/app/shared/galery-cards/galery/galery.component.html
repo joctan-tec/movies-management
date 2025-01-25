@@ -1,7 +1,7 @@
-<div *ngIf="movies.length > 0">
-  <div class="grid grid-cols-3">
+<div *ngIf="movies.length > 0" class="bg-[#2C3E50]">
+  <div class="grid grid-cols-3 justify-items-stretch">
     <ng-container *ngFor="let movie of paginatedMovies">
-      <shared-card [movie]="movie" [admin]="admin"></shared-card>
+      <shared-card class="p-2" [movie]="movie" [admin]="admin"></shared-card>
     </ng-container>
   </div>
 
@@ -12,10 +12,10 @@
   ></shared-paginator>
 </div>
 
-<div *ngIf="actors.length > 0">
-  <div class="grid grid-cols-3">
+<div *ngIf="actors.length > 0" class="bg-[#2C3E50]">
+  <div class="grid grid-cols-3 justify-items-stretch">
     <ng-container *ngFor="let actor of paginatedActors">
-      <shared-card [actor]="actor" [admin]="admin"></shared-card>
+      <shared-card class="p-2" [actor]="actor" [admin]="admin"></shared-card>
     </ng-container>
   </div>
 

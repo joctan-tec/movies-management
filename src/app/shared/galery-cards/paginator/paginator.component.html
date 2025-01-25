@@ -1,8 +1,10 @@
-<mat-paginator
-  [length]="totalItems"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="[4, 8, 12]"
-  (page)="onPageChange($event)"
-  aria-label="Paginator"
->
-</mat-paginator>
+<div class="bg-[#2C3E50]">
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[1, 3, 6]"
+    (page)="onPageChange($event)"
+    aria-label="Paginator"
+  >
+  </mat-paginator>
+</div>
