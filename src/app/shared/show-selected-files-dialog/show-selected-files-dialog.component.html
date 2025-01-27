@@ -1,0 +1,32 @@
+<h1 mat-dialog-title class="text-2xl text-center mt-4 font-semibold">Uploaded Files</h1>
+<div mat-dialog-content class="p-4">
+  <mat-card *ngFor="let file of files" class="file-card">
+    <mat-card-title style="font-size: 1.2rem; font-weight: bold;">{{ file.name }}</mat-card-title>
+    <mat-card-content style="font-size: 1rem; margin-top: 0.5rem;">
+        <div class="flex">
+            <div>
+                <p>Size: {{ file.size | bytes }}</p>
+                <p>Type: {{ file.type }}</p>
+            </div>
+            <div class="ml-4">
+                @if (file.type.includes('image')) {
+                    <img [src]="getImageSrc(file)" alt="{{ file.name }}" class="w-full h-auto" />
+                }@else {
+                    <mat-icon>insert_drive_file</mat-icon>
+                }
+            </div>
+            
+        </div>
+        
+      
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-mini-fab aria-label="Button with a delete icon" (click)="removeFile(file)" style="color: #fff; background: crimson;">
+            <mat-icon>delete</mat-icon>
+          </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div mat-dialog-actions class="mb-4 me-4 place-self-end">
+  <button mat-raised-button style="background-color: crimson;color: #fff; font-size: 1rem;" (click)="closeDialog()">Close</button>
+</div>

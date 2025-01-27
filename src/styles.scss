@@ -1,9 +1,14 @@
+
+@use '@angular/material' as mat;
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
+html, body { 
+  height: 100%; 
+  background-color: #2C3E50;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-notched-outline__notch
 {
@@ -11,3 +16,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.custom-btn {
+  background-color: #E74C3C80;
+  color: #fff;
+}
+
+
+
+
+:root {
+  @include mat.snack-bar-overrides((
+    container-color : #33333300,
+  ));
+}
+
+// Define las clases personalizadas para los tipos de snackbars
+.snackbar-success {
+  background-color: #4caf50; // Verde
+  color: #ffffff; // Texto blanco
+}
+
+.snackbar-error {
+  background-color: #f44336; // Rojo
+  color: #ffffff; // Texto blanco
+}
+
+.snackbar-warning {
+  background-color: #ff9800; // Naranja
+  color: #ffffff; // Texto blanco
+}
+
+.snackbar-info {
+  background-color: #2196f3; // Azul
+  color: #ffffff; // Texto blanco
+}

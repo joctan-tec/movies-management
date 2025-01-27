@@ -1,0 +1,67 @@
+<div class="w-full h-dvh p-5 flex flex-col align-middle justify-center overflow-x-hidden">
+    <h1 class="text-center text-4xl text-white font-bold mb-8">New User</h1>
+    <form [formGroup]="registerForm" class="
+        grid 
+        grid-cols-1 md:grid-cols-2
+        gap-5
+        w-full md:w-10/12 lg:w-8/12
+        mx-auto justify-center mt-4">
+        <div class="w-full h-full space-y-3">
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>User Name</mat-label>
+                    <input placeholder="Type your user name" matInput formControlName="userName" />
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Email</mat-label>
+                    <input placeholder="Type your email" matInput formControlName="email" />
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="bornDate" />
+                    <mat-hint style="color: #fff;">MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Password</mat-label>
+                    <input placeholder="Type your password" matInput formControlName="password"
+                        [type]="hide() ? 'password' : 'text'" />
+                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="w-full h-full">
+            <app-drop-file #dropFiles [config]="customConfig" (onFilesChange)="onFileSelected($event)"></app-drop-file>
+        </div>
+
+
+
+        <div class="flex justify-center mt-5 mx-auto w-7/12">
+            <button mat-flat-button (click)="onSubmit()" style="
+                    background-color: #E74C3C80;
+                    color: #fff;
+                    width: 100%;
+                    font-size: 1.2rem;
+                    ">
+                Register
+            </button>
+        </div>
+    </form>
+
+
+</div>

@@ -5,11 +5,16 @@ import { ActorsComponent } from './movies/pages/actors/actors.component';
 import { NewActorComponent } from './movies/pages/new-actor/new-actor.component';
 import { ActorComponent } from './movies/pages/actor/actor.component';
 import { LayoutPageComponent } from './movies/pages/layout-page/layout-page.component';
+import { RegisterComponent } from './movies/pages/register/register.component';
 
 export const routes: Routes = [
   {
     path:"auth",
     component: LoginComponent
+  },
+  {
+    path:"register",
+    component: RegisterComponent
   },
   {
     path:"movies",

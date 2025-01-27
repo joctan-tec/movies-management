@@ -1,0 +1,9 @@
+.drag-drop-hover {
+    transition: 300ms;
+  } 
+  
+  .drag-drop-hover:hover {
+    transform: scale(1.01); /* Hace un ligero zoom */
+  }
+
+
