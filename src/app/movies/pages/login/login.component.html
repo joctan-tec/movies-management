@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="w-full custom-bg-login h-dvh p-5 flex flex-col align-middle justify-center">
+    <div>
+        <img src="images/avatar.png" alt="avatar" class="
+            sm:h-56
+            h-32 mx-auto
+            object-cover
+            mb-16
+            ">
+    </div>
+    <form [formGroup]="loginForm" class="
+        w-full sm:w-4/12
+        mx-auto justify-center">
+        <div class="mb-8">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input placeholder="Type your email" matInput formControlName="email" />
+            </mat-form-field>
+        </div>
+
+        <div class="mb-8">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Password</mat-label>
+                <input placeholder="Type your password" matInput formControlName="password"
+                    [type]="hide() ? 'password' : 'text'" />
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div class="flex justify-center mt-5 mx-auto w-7/12">
+            <button mat-flat-button (click)="onSubmit()" style="
+                    background-color: #E74C3C80;
+                    color: #fff;
+                    width: 100%;
+                    font-size: 1.2rem;
+                    ">
+                Login
+            </button>
+        </div>
+    </form>
+
+
+</div>

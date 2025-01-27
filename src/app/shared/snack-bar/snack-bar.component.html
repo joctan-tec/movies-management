@@ -1,0 +1,10 @@
+<div class="ERROR flex justify-center align-middle">
+    <span class="" matSnackBarLabel>
+        {{data.message}}
+      </span>
+      <span matSnackBarActions>
+        <button mat-button matSnackBarAction (click)="snackBarRef.dismissWithAction()">
+            <mat-icon style="color: #fff;">close</mat-icon>
+        </button>
+    </span>
+</div>

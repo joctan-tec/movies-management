@@ -1,0 +1,49 @@
+<!-- File Drag and Drop -->
+<div class="w-full h-full mx-auto mt-5 md:mt-0 flex align-middle justify-center flex-col text-center rounded-xl p-8 drag-drop-hover relative"
+    [style]="{
+        border: config.borderType,
+        borderColor: config.borderColor,
+        color: config.color,
+        backgroundColor: config.backgroundColor,
+        cursor: 'pointer',
+
+        }">
+    <div class="flex space-x-1 md:space-x-0 -translate-y-full md:-translate-y-0 md:block md:translate-x-full md:space-y-1  absolute end-0 top-0">
+        <button *ngIf="filesLength > 0"
+            class="bg-sky-300  p-3 text-black rounded-full  flex align-middle justify-center"
+            (click)="openFileDialog()">
+            <mat-icon [matBadge]="filesLength">visibility</mat-icon>
+            <!-- Include text description of the icon's meaning for screen-readers -->
+            <span class="hidden"> Open to see added files </span>
+        </button>
+
+        <button *ngIf="filesLength > 0"
+            class="bg-rose-500  p-3 text-black rounded-full  flex align-middle justify-center"
+            (click)="undoFile()">
+            <mat-icon>undo</mat-icon>
+            <!-- Include text description of the icon's meaning for screen-readers -->
+            <span class="hidden"> Open to see added files </span>
+        </button>
+        <button *ngIf="filesLength > 0"
+            class="bg-green-400  p-3 text-black rounded-full  flex align-middle justify-center"
+            (click)="redoFile()">
+            <mat-icon>redo</mat-icon>
+            <!-- Include text description of the icon's meaning for screen-readers -->
+            <span class="hidden"> Open to see added files </span>
+        </button>
+        
+    </div>
+
+    <mat-icon style="font-size: 3rem; width: auto; height: auto">cloud_upload</mat-icon>
+
+    <p class="hidden md:block">{{ config.text }}</p>
+    <p class="md:hidden">{{ config.mobileText }}</p>
+
+    <input type="file" (drop)="onDrop($event)" (change)="onChange($event)" (dragover)="preventDefault($event)"
+        accept="image/*" [multiple]="config.multiple"
+        class="absolute start-0 top-0 w-full h-full opacity-0 cursor-pointer" />
+
+    <p *ngIf="this.files.length > 0" class="text-ellipsis whitespace-normal overflow-hidden">
+        Last Selected: <span class="underline">{{ files.at(-1)?.name }}</span>
+    </p>
+</div>
