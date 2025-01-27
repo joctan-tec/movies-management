@@ -48,6 +48,6 @@ export const routes: Routes = [
   },
   {
     path:"**",
-    redirectTo:"main"
+    redirectTo:"auth"
   }
 ];
