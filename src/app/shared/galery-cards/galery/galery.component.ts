@@ -3,12 +3,12 @@ import { Actor, Movie } from '../../../movies/interfaces/models.interfaces';
 import { CardComponent } from "../../cards/card/card.component";
 import { PaginatorComponent } from "../paginator/paginator.component";
 import { PageEvent } from '@angular/material/paginator';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { SpinerComponent } from "../../spiner/spiner.component";
 
 @Component({
   selector: 'shared-galery',
-  imports: [CardComponent, PaginatorComponent, MatProgressSpinner, CommonModule],
+  imports: [CardComponent, PaginatorComponent, CommonModule, SpinerComponent],
   templateUrl: './galery.component.html',
   styleUrls: ['./galery.component.scss']
 })
@@ -16,7 +16,7 @@ export class GaleryComponent {
   @Input() public movies: Movie[] = [];
   @Input() public actors: Actor[] = [];
 
-  public admin: boolean = false;
+  public admin: boolean = true;
 
   // Propiedades para paginación
   @Input() public pageSize = 4;
@@ -27,6 +27,7 @@ export class GaleryComponent {
   // Tarjetas paginadas
   protected paginatedMovies: Movie[] = [];
   protected paginatedActors: Actor[] = [];
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['movies'] || changes['actors']) {

@@ -1,3 +1,65 @@
-.buttonInfo{
-  background-color: #3498DB;
+/* Botón "Ver más información" */
+.btn-info {
+  background-color: #3498db; /* Azul cielo medio */
+  color: #ffffff; /* Blanco */
+  font-weight: bold;
+  padding: 0.5rem 1rem; /* Ajusta el tamaño del botón */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Suaviza el hover */
+}
+
+.btn-info:hover {
+  background-color: #2980b9; /* Azul más intenso */
+}
+
+/* Botón "Editar" */
+.btn-edit {
+  background-color: #27ae60; /* Verde esmeralda */
+  color: #ffffff; /* Blanco */
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #1e8449; /* Verde más oscuro */
+}
+
+/* Botón "Borrar" */
+.btn-delete {
+  background-color: #e74c3c; /* Rojo coral */
+  color: #ffffff; /* Blanco */
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b; /* Rojo más oscuro */
+}
+
+.card-size {
+  width: 300px; /* O el tamaño que desees */
+  height: 300px; /* O el tamaño que desees */
+  padding: 16px; /* Ajusta el padding según lo necesites */
+}
+
+.card-image {
+  width: 100%; /* Hace que la imagen ocupe todo el ancho */
+  height: 150px; /* Altura fija para la imagen */
+  object-fit: contain;
+  border-radius: 25px;
+}
+
+.card-content {
+  height: calc(100% - 150px); /* Ajusta el espacio restante en el card después de la imagen */
+  overflow-y: auto; /* Asegura que el contenido del card no se desborde */
 }

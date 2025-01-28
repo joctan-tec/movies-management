@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { CardComponent } from "../../cards/card/card.component";
 import { Actor, Movie } from '../../../movies/interfaces/models.interfaces';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinerComponent } from "../../spiner/spiner.component";
 
 @Component({
   selector: 'shared-pages-carousel',
   standalone: true,
-  imports: [CommonModule, CarouselModule, CardComponent,MatProgressSpinnerModule],
+  imports: [CommonModule, CarouselModule, CardComponent, SpinerComponent],
   templateUrl: './pages-carousel.component.html',
   styleUrls: ['./pages-carousel.component.scss']
 })

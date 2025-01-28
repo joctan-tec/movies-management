@@ -2,20 +2,22 @@
   <div class="grid grid-cols-3 justify-items-stretch">
     <ng-container *ngFor="let movie of paginatedMovies">
       <shared-card class="p-2" [movie]="movie" [admin]="admin"></shared-card>
+      <shared-paginator
+      [totalItems]="movies.length"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChangeMovies($event)"
+      ></shared-paginator>
     </ng-container>
+
   </div>
 
-  <shared-paginator
-    [totalItems]="movies.length"
-    [pageSize]="pageSize"
-    (pageChange)="onPageChangeMovies($event)"
-  ></shared-paginator>
+
 </div>
 
 <div *ngIf="actors.length > 0" class="bg-[#2C3E50]">
-  <div class="grid grid-cols-3 justify-items-stretch">
+  <div class="grid grid-cols-3 gap-4 justify-items-stretch">
     <ng-container *ngFor="let actor of paginatedActors">
-      <shared-card class="p-2" [actor]="actor" [admin]="admin"></shared-card>
+      <shared-card class="w-64 h-76 p-1" [actor]="actor" [admin]="admin"></shared-card>
     </ng-container>
   </div>
 
@@ -27,8 +29,5 @@
 </div>
 
 <ng-template #loading>
-  <div class="">
-    <mat-spinner></mat-spinner>
-    <p>Cargando...</p>
-  </div>
+  <shared-spiner></shared-spiner>
 </ng-template>
