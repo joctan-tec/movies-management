@@ -4,10 +4,14 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Actor } from '../../interfaces/models.interfaces';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SpinerComponent } from "../../../shared/spiner/spiner.component";
+import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { PagesCarouselComponent } from "../../../shared/carousel/pages-carousel/pages-carousel.component";
 
 @Component({
   selector: 'app-actor',
-  imports: [MatButtonModule,MatIconModule,RouterModule],
+  imports: [MatButtonModule, MatIconModule, RouterModule, SpinerComponent, CommonModule, PagesCarouselComponent],
   templateUrl: './actor.component.html',
   styleUrl: './actor.component.scss'
 })
@@ -27,8 +31,11 @@ export class ActorComponent {
     this.route.params.subscribe(params => {
       this.actorName = params['name'];
     });
-    console.log('mellamo '+this.actorName);
-    //this.actorService.getActor(this.actorName)
+    this.actorService.getActor(this.actorName).subscribe(response =>
+      {
+        this.actor=response;
+      }
+    )
   }
 
 }

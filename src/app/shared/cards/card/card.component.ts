@@ -8,6 +8,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { SpinerComponent } from "../../spiner/spiner.component";
 import { ActorService } from '../../../movies/services/actor.service';
+import { MovieService } from '../../../movies/services/movie.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../../../movies/Components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'shared-card',
@@ -16,10 +20,13 @@ import { ActorService } from '../../../movies/services/actor.service';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
+  [x: string]: any;
 
   constructor(
     private actorService:ActorService,
-    private router:Router
+    private movieService:MovieService,
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ){}
 
   @Input()
@@ -38,11 +45,33 @@ export class CardComponent {
   }
 
 
-  delete(name:string){
-    this.actorService.deleteActor(name).subscribe(response =>{
-      if(response.activo){
-        window.location.reload();
-      }
+  deleteActor(name:string){
+
+    const dialogRef =  this.dialog.open(ConfirmDialogComponent, {
+      data: name
     });
+
+    dialogRef.afterClosed()
+      .subscribe( (result) => {
+        if (!result) return;
+
+        this.actorService.deleteActor(name).subscribe(response =>{
+          if(response.activo){
+            window.location.reload();
+            this.snackbar.open(`Actor@ ${name} eliminado!`, 'Cerrar',{duration:3000});
+          }
+        });
+      });
   }
+
+  deleteMovie(MovieName:string){
+    //delete movie
+    //this.movieService.deleteActor(name).subscribe(response =>{
+   //   if(response.activo){
+   //     window.location.reload();
+   //   }
+   // });
+
+  }
+
 }

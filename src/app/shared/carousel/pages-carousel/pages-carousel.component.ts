@@ -15,6 +15,7 @@ import { SpinerComponent } from "../../spiner/spiner.component";
 export class PagesCarouselComponent {
   @Input() actors: Actor[] = []; // Lista completa de actores
   @Input() movies: Movie[] = []; // Lista completa de películas
+  @Input() imagenes: { url: string, activo: boolean }[] = [];
 
   responsiveOptions: any[] = []; // Opciones del carrusel para diferentes tamaños de pantalla
 

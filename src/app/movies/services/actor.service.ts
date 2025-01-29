@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Actor } from '../interfaces/models.interfaces';
@@ -22,44 +22,45 @@ export class ActorService {
   }
 
   getActor(name:string):Observable<Actor>{
-    return this.http.get<Actor>(`${this.url}/actors/getOne/${name}`)
+    return this.http.get<{ actor: Actor }>(`${this.url}/actors/getOne/${name}`).pipe(
+      map((response) => response.actor) // Extrae la propiedad 'actors' de la respuesta
+    );
   }
 
   deleteActor(name:string):Observable<Actor>{
     const body = { nombre: name };
-
     return this.http.patch<{actor:Actor}>(`${this.url}/actors/delete`,body).pipe(
       map((response) => response.actor)
     );
   }
 
   addActor(nombre:string, biografia:string, peliculas:string[], fechaDeNacimiento:string, imagenes:string[]):Observable<Actor>{
-    let params = new HttpParams()
-      .set('nombre',nombre)
-      .set('biografia', biografia)
-      .set('fechaDeNacimiento', fechaDeNacimiento);
-      peliculas.forEach((peliculas) => {
-        params = params.append('peliculas', peliculas);
-      });
-      imagenes.forEach((imagenes) => {
-        params = params.append('imagenes', imagenes);
-      });
-    return this.http.post<Actor>(`${this.url}/actors/create`,params)
+    const body = {
+      nombre:nombre,
+      biografia: biografia,
+      fechaDeNacimiento: fechaDeNacimiento,
+      peliculas: peliculas,
+      imagenes: imagenes
+    }
+    return this.http.post<Actor>(`${this.url}/actors/create`,body)
   }
 
   editActor(nombre:string, biografia:string, peliculas:string[], fechaDeNacimiento:string, imagenes:string[]):Observable<Actor>{
-    let params = new HttpParams()
-      .set('nombre',nombre)
-      .set('biografia', biografia)
-      .set('fechaDeNacimiento', fechaDeNacimiento);
-      peliculas.forEach((peliculas) => {
-        params = params.append('peliculas', peliculas);
-      });
-      imagenes.forEach((imagenes) => {
-        params = params.append('imagenes', imagenes);
-      });
-    return this.http.put<Actor>(`${this.url}/actors/update`,params)
+    const body = {
+      nombre:nombre,
+      biografia: biografia,
+      fechaDeNacimiento: fechaDeNacimiento,
+      peliculas: peliculas,
+      imagenes: imagenes
+    }
+    return this.http.put<Actor>(`${this.url}/actors/update`,body)
   }
 
+  addImgInActor(nombre:string, imagenes:string[]):Observable<Actor>{
+    const body = {
+      imagenes: imagenes
+    }
+    return this.http.patch<Actor>(`${this.url}/actors/addImg/${nombre}`,body)
+  }
 
 }

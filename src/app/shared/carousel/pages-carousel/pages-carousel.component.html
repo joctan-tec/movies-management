@@ -14,7 +14,6 @@
     </p-carousel>
   </div>
 
-
   <!-- Carrusel de Películas -->
   <p-carousel *ngIf="movies.length > 0"
               [value]="movies"
@@ -27,6 +26,22 @@
       <shared-card [movie]="movie"></shared-card>
     </ng-template>
   </p-carousel>
-  <shared-spiner></shared-spiner>
+
+  <p-carousel *ngIf="imagenes.length > 0"
+      [value]="imagenes"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="item" let-image>
+      <div class="image-item">
+        <img class="images" [src]="image.url" alt=" " />
+      </div>
+    </ng-template>
+  </p-carousel>
+
+  <div *ngIf="actors.length < 1 && movies.length < 1 && imagenes.length < 1">
+    <shared-spiner></shared-spiner>
+  </div>
 </div>
 

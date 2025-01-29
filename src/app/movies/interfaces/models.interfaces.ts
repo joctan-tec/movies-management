@@ -12,7 +12,7 @@ export interface Movie {
 
 export interface Actor {
   nombre: string;           // "nombre"
-  fecha_nacimiento: Date;   // "fecha_nacimiento" (lo mantenemos como Date)
+  fechaDeNacimiento: Date;   // "fecha_nacimiento" (lo mantenemos como Date)
   biografia: string;        // "biografia"
   imagenes: { url: string, activo: boolean }[]; // "imagenes" con 'url' y 'activo'
   peliculas: string[];      // "peliculas"
