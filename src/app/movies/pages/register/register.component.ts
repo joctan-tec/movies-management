@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostListener, inject, signal, ViewChild} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +16,7 @@ import { SnackBarComponent } from '../../../shared/snack-bar/snack-bar.component
 import { BackgroundColorSnackBar } from '../../../enums/background-color-snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarConfig } from '../../../interfaces/snack-bar-config';
+import { Router } from '@angular/router';
 
 
 
@@ -36,6 +37,7 @@ import { SnackBarConfig } from '../../../interfaces/snack-bar-config';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -43,15 +45,35 @@ export class RegisterComponent {
   }
   @ViewChild('dropFiles') dropFileRef!: DropFileComponent;
 
+  private _infoSnackBar : SnackBarConfig = {
+    duration: 5000,
+    type: BackgroundColorSnackBar.INFO,
+    action: 'Close',
+    message: 'Loading...',
+    isLoading: true
+  };
+
   private _snackBar = inject(MatSnackBar);
   
-    openSnackBar(message: string, action: string, type : BackgroundColorSnackBar, time: number = 3000) {
+    openSnackBar(message: string, action: string, type : BackgroundColorSnackBar, time: number = 3000, isLoading: boolean = false) {
       const config: SnackBarConfig = {
         duration: time,
         type: type,
         action: action,
         message: message
       };
+
+      if(isLoading){
+        config.isLoading = true;
+        this._snackBar.openFromComponent(SnackBarComponent, {
+          data: this._infoSnackBar,
+          panelClass: [this._infoSnackBar.type], // Aplica la clase basada en el tipo
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        return;
+      }
+
       this._snackBar.openFromComponent(SnackBarComponent, {
         data: config,
         duration: config.duration,
@@ -60,6 +82,10 @@ export class RegisterComponent {
         verticalPosition: 'top',
       });
     };
+
+  closeSnackBar() {
+    this._snackBar.dismiss();
+  }
 
   
   onFileSelected(event: File[]) {
@@ -74,7 +100,7 @@ export class RegisterComponent {
     borderColor: '#26c6da',
     color: '#004d40',
     text: 'Drop it Like it\'s Hot',
-    mobileText: 'Click to select files',
+    mobileText: 'Click to select your profile picture',
     iconName: 'file_upload',
     multiple: true
   };
@@ -82,8 +108,11 @@ export class RegisterComponent {
 
   registerForm!: FormGroup;
   selectedFiles: File[] = [];
+  maxDate: Date;
+  mobile = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private _router: Router) {
+    this.maxDate = new Date();
     this.registerForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -93,8 +122,22 @@ export class RegisterComponent {
     });
   }
 
+  onBack() {
+    this._router.navigateByUrl('/auth');
+  }
+
+  isMobile: boolean = window.innerWidth <= 600; // Detecta si la pantalla es pequeña inicialmente.
+
+  @HostListener('window:resize', ['$event'])
+  onScreenResize(event: any): void {
+    this.isMobile = event.target.innerWidth <= 600; // Actualiza la variable según el tamaño de pantalla.
+  }
+
+ 
+
   onSubmit() {
     if (this.registerForm.valid) {
+      this.openSnackBar('Creating user...', 'Close', BackgroundColorSnackBar.INFO, 5000, true);
       const formData = new FormData();
       formData.append('userName', this.registerForm.get('userName')?.value);
       formData.append('email', this.registerForm.get('email')?.value);
@@ -110,12 +153,13 @@ export class RegisterComponent {
 
       this.userService.createUserWithImages(formData).subscribe({
         next: (response) => {
-          console.log('Usuario creado con éxito:', response);
+          this.closeSnackBar();
           this.openSnackBar('User created successfully', 'Close', BackgroundColorSnackBar.SUCCESS, 5000);
+          this._router.navigateByUrl('/auth');
           
         },
         error: (error) => {
-          console.error('Error al crear usuario:', error);
+          this.closeSnackBar();
           this.openSnackBar('Error creating user', 'Close', BackgroundColorSnackBar.ERROR, 5000);
         },
       });

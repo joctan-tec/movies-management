@@ -17,13 +17,13 @@ export const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path:"movies",
-    component: MoviesComponent
-  },
-  {
     path:"main",
     component:LayoutPageComponent,
     children:[
+      {
+        path:"movies",
+        component: MoviesComponent
+      },
       {
         path:"actors",
         component:ActorsComponent
@@ -42,7 +42,7 @@ export const routes: Routes = [
       },
       {
         path:"**",
-        redirectTo:"actors"
+        redirectTo:"movies"
       }
     ]
   },

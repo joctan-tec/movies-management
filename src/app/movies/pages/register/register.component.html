@@ -1,5 +1,8 @@
 <div class="w-full h-dvh p-5 flex flex-col align-middle justify-center overflow-x-hidden">
-    <h1 class="text-center text-4xl text-white font-bold mb-8">New User</h1>
+    <h1 class="text-center text-4xl text-white font-bold mb-8 relative">
+        <span (click)="onBack()"  class="absolute top-0 start-0 md:start-40 cursor-pointer hover:bg-cyan-50 hover:rounded-full hover:bg-opacity-35"><mat-icon>arrow_back</mat-icon></span>
+        New User
+    </h1>
     <form [formGroup]="registerForm" class="
         grid 
         grid-cols-1 md:grid-cols-2
@@ -17,17 +20,18 @@
             <div>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Email</mat-label>
-                    <input placeholder="Type your email" matInput formControlName="email" />
+                    <input placeholder="Type your email" matInput type="email" formControlName="email" />
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="bornDate" />
+                    <input matInput [matDatepicker]="picker" formControlName="bornDate" [max]="maxDate" />
                     <mat-hint style="color: #fff;">MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker [touchUi]="isMobile"  #picker></mat-datepicker>
+                    
                 </mat-form-field>
             </div>
 
@@ -45,7 +49,7 @@
 
         </div>
 
-        <div class="w-full h-full">
+        <div class="w-full h-16 md:h-full">
             <app-drop-file #dropFiles [config]="customConfig" (onFilesChange)="onFileSelected($event)"></app-drop-file>
         </div>
 

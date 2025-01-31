@@ -12,10 +12,11 @@ import { BackgroundColorSnackBar } from '../../enums/background-color-snack-bar'
 import { SnackBarConfig } from '../../interfaces/snack-bar-config';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-snack-bar',
-  imports: [MatButtonModule, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction, CommonModule, MatIconModule],
+  imports: [MatButtonModule, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction, CommonModule, MatIconModule, MatProgressSpinner],
   templateUrl: './snack-bar.component.html',
   styleUrl: './snack-bar.component.scss'
 
@@ -26,7 +27,8 @@ export class SnackBarComponent {
     duration: 3000,
     type: BackgroundColorSnackBar.INFO,
     action: 'Close',
-    message: 'Hello World'
+    message: 'Hello World',
+    isLoading: false,
   };
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: SnackBarConfig) {

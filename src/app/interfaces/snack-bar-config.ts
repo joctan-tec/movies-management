@@ -5,4 +5,5 @@ export interface SnackBarConfig {
     type: BackgroundColorSnackBar;
     action: string;
     message: string;
+    isLoading?: boolean;
 }

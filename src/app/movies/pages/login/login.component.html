@@ -13,14 +13,14 @@
         <div class="mb-8">
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Email</mat-label>
-                <input placeholder="Type your email" matInput formControlName="email" />
+                <input placeholder="Type your email" type="email" matInput formControlName="email" />
             </mat-form-field>
         </div>
 
         <div class="mb-8">
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Password</mat-label>
-                <input placeholder="Type your password" matInput formControlName="password"
+                <input placeholder="Type your password" matInput type="password" formControlName="password"
                     [type]="hide() ? 'password' : 'text'" />
                 <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide()">
@@ -29,7 +29,7 @@
             </mat-form-field>
         </div>
 
-        <div class="flex justify-center mt-5 mx-auto w-7/12">
+        <div class="flex flex-col justify-center mt-5 mx-auto w-7/12">
             <button mat-flat-button (click)="onSubmit()" style="
                     background-color: #E74C3C80;
                     color: #fff;
@@ -38,6 +38,10 @@
                     ">
                 Login
             </button>
+
+            <p class="mt-5 text-center text-white text-md">
+                 Don't have an account? <span class="text-blue-500 cursor-pointer" (click)="this.onRegister()">Sign Up</span>
+            </p>
         </div>
     </form>
 
