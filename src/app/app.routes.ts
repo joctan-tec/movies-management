@@ -1,3 +1,4 @@
+import { MovieComponent } from './movies/pages/movie/movie.component';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './movies/pages/login/login.component';
 import { MoviesComponent } from './movies/pages/movies/movies.component';
@@ -19,6 +20,10 @@ export const routes: Routes = [
   {
     path:"movies",
     component: MoviesComponent
+  },
+  {
+    path:"movie/:name",
+    component:MovieComponent
   },
   {
     path:"main",

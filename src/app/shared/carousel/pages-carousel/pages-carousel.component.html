@@ -40,7 +40,20 @@
     </ng-template>
   </p-carousel>
 
-  <div *ngIf="actors.length < 1 && movies.length < 1 && imagenes.length < 1">
+  <p-carousel *ngIf="imagenesMovies.length > 0"
+    [value]="imagenesMovies"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions">
+  <ng-template pTemplate="item" let-image>
+    <div class="image-item">
+      <img class="images" [src]="image" alt=" " />
+    </div>
+    </ng-template>
+  </p-carousel>
+
+  <div *ngIf="actors.length < 1 && movies.length < 1 && imagenes.length < 1 && imagenesMovies.length<0">
     <shared-spiner></shared-spiner>
   </div>
 </div>

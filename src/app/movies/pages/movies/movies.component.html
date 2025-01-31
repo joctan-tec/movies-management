@@ -1,1 +1,14 @@
 <p>movies works!</p>
+<!--agregar los filtros-->
+@if(movies.length>0 && TopMovies.length>0){
+  <shared-pages-carousel [movies]="TopMovies"></shared-pages-carousel>
+  <div class="grid grid-flow-col grid-rows-2 gap-4 bg-[#2C3E50] h-screen">
+    <div class="m-6 row-start-2 bg-[#2C3E50] mt-16">
+      <shared-galery [movies]="movies" [pageSize]="6"></shared-galery>
+    </div>
+  </div>
+}@else{
+  <div class="flex items-center justify-center h-screen text-white">
+    <shared-spiner class="spiner"></shared-spiner>
+  </div>
+}

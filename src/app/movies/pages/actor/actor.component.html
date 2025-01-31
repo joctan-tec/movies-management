@@ -1,15 +1,15 @@
 <div class="grid grid-rows-4 gap-4 bg-[#2C3E50] h-screen text-white">
-  @if(actor){
+  @if(actor && apariciones && showApariciones){
     <div class="bg-[#2C3E50] p-4 grid grid-cols-3 gap-4 place-items-center justify-items-center align-items-end">
       <h1 class="name">{{actor.nombre}}</h1>
       <div>
         <h6 class="sub_name">Fecha de nacimiento</h6>
         <h6 class="sub_name">{{actor.fechaDeNacimiento|date: 'dd/MM/yyyy'}}</h6>
       </div>
-      <button class="buttonInfo" mat-fab extended [routerLink]="['/main/actors']"> <!--enviar a info del actor-->
+      <!--<button class="buttonInfo" mat-fab extended [routerLink]="['/main/actors']">
         <mat-icon>undo</mat-icon>
         Back
-      </button>
+      </button>-->
     </div>
     <div class="bg-[#2C3E50] p-4 ">
     <h2 class="biography">Biografía</h2>
@@ -20,13 +20,12 @@
       <h1 class="biography">Imágenes</h1>
       <shared-pages-carousel [imagenes]="actor.imagenes"></shared-pages-carousel>
     </div>
+
     <div class="bg-[#2C3E50] p-4">
       <h1 class="biography">Apariciones</h1>
-      @if (actor) {
-        <!--poner las pelis donde aparece-->
-
-      }
+      <shared-pages-carousel [movies]="apariciones"></shared-pages-carousel>
     </div>
+
 }@else {
   <div class="flex items-center justify-center h-screen text-white">
     <shared-spiner class="spiner"></shared-spiner>
