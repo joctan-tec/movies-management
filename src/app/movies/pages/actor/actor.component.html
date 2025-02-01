@@ -1,39 +1,34 @@
 <div class="grid grid-rows-4 gap-4 bg-[#2C3E50] h-screen text-white">
-  <div class="bg-[#2C3E50] p-4 grid grid-cols-3 gap-4 place-items-center justify-items-center align-items-end">
-    @if (actor) {
+  @if(actor && apariciones && showApariciones){
+    <div class="bg-[#2C3E50] p-4 grid grid-cols-3 gap-4 place-items-center justify-items-center align-items-end">
       <h1 class="name">{{actor.nombre}}</h1>
       <div>
         <h6 class="sub_name">Fecha de nacimiento</h6>
-        <h6 class="sub_name">{{actor.fecha_nacimiento}}</h6>
+        <h6 class="sub_name">{{actor.fechaDeNacimiento|date: 'dd/MM/yyyy'}}</h6>
       </div>
-    }
-    <h1 class="name">Leo</h1>
-    <div>
-      <h6 class="sub_name">Fecha de nacimiento</h6>
-      <h6 class="sub_name">1974-11-11</h6>
+      <!--<button class="buttonInfo" mat-fab extended [routerLink]="['/main/actors']">
+        <mat-icon>undo</mat-icon>
+        Back
+      </button>-->
     </div>
-    <button class="buttonInfo" mat-fab extended [routerLink]="['/main/actors']"> <!--enviar a info del actor-->
-      <mat-icon>undo</mat-icon>
-      Back
-    </button>
+    <div class="bg-[#2C3E50] p-4 ">
+    <h2 class="biography">Biografía</h2>
+    <br>
+    <span class="biography_text">{{actor.biografia}}</span>
+    </div>
+    <div class="bg-[#2C3E50] p-4">
+      <h1 class="biography">Imágenes</h1>
+      <shared-pages-carousel [imagenes]="actor.imagenes"></shared-pages-carousel>
+    </div>
+
+    <div class="bg-[#2C3E50] p-4">
+      <h1 class="biography">Apariciones</h1>
+      <shared-pages-carousel [movies]="apariciones"></shared-pages-carousel>
+    </div>
+
+}@else {
+  <div class="flex items-center justify-center h-screen text-white">
+    <shared-spiner class="spiner"></shared-spiner>
   </div>
-  <div class="bg-[#2C3E50] p-4 ">
-    <h2 class="biography">Biografia</h2>
-    @if (actor) {
-      <span class="biography_text">{{actor.biografia}}</span>
-    }
-    <span class="biography_text">Leonardo Wilhelm DiCaprio es un actor y productor estadounidense. Es reconocido por sus papeles en películas de gran éxito como 'Titanic', 'Inception' y 'The Revenant'. DiCaprio ha sido nominado varias veces al Premio Oscar, ganando finalmente en 2016 por su actuación en 'The Revenant'.</span>
-  </div>
-  <div class="bg-[#2C3E50] p-4">
-    <h1 class="biography">Imágenes</h1>
-    @if (actor) {
-      <!--poner las imagenes que trae-->
-    }
-  </div>
-  <div class="bg-[#2C3E50] p-4">
-    <h1 class="biography">Apariciones</h1>
-    @if (actor) {
-      <!--poner las pelis donde aparece-->
-    }
-  </div>
-</div>
+}
+

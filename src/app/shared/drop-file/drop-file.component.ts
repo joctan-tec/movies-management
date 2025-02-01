@@ -19,7 +19,6 @@ export interface DragDropConfig {
   text: string;
   mobileText: string;
   iconName: string;
-
   multiple: boolean;
 }
 

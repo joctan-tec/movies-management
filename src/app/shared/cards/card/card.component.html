@@ -3,43 +3,40 @@
     <mat-card class="card-size" appearance="outlined">
       <img mat-card-image [src]="actor.imagenes[0].url" class="card-image">
       <mat-card-header>
-        <mat-card-title>{{actor.nombre}}</mat-card-title>
-        <mat-card-subtitle>{{actor.fecha_nacimiento}}</mat-card-subtitle>
+        <mat-card-title class="text-black">{{actor.nombre}}</mat-card-title>
+        <mat-card-subtitle>{{actor.fechaDeNacimiento|date: 'dd/MM/yyyy'}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="card-content">
-        <button class="btn-info" mat-fab extended [routerLink]="['/main',actor.nombre]">
-          <mat-icon>more_horiz</mat-icon>
-          Info
+        <button class="btn-info" mat-fab [routerLink]="['/main/actors',actor.nombre]">
+          <mat-icon>info</mat-icon>
         </button>
         @if (admin) {
           <button class="btn-edit" mat-fab [routerLink]="['/edit', actor.nombre]">
             <mat-icon>edit_note</mat-icon>
           </button>
-          <button class="btn-delete" mat-fab (click)="delete(actor.nombre)">
+          <button class="btn-delete" mat-fab (click)="deleteActor(actor.nombre)">
             <mat-icon>delete</mat-icon>
           </button>
         }
       </mat-card-content>
     </mat-card>
   } @else if (movie) {
-    <mat-card appearance="outlined" class="card-size">
-
+    <mat-card appearance="outlined" class="card-movie-size">
       <img mat-card-image [src]="movie.imagenes[0]" class="card-image">
       <mat-card-header>
-        <mat-card-title>{{movie.calificacion}}</mat-card-title>
+        <mat-card-title class="text-black">✭ {{movie.calificacion}}</mat-card-title>
+        <mat-card-title class="text-black">{{movie.titulo}}</mat-card-title>
         <mat-card-subtitle>{{movie.genero}}</mat-card-subtitle>
-        <mat-card-subtitle>{{movie.ano_lanzamiento}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="card-content">
-        <button class="" mat-fab extended [routerLink]=""> <!--enviar a info de la movie-->
-          <mat-icon>more_horiz</mat-icon>
-          Info
+        <button class="" mat-fab [routerLink]="['/main/movie',movie.titulo]"> <!--enviar a info de la movie-->
+          <mat-icon>info</mat-icon>
         </button>
         @if (admin) {
-          <button class="btn-edit"  mat-fab [routerLink]=""> <!--enviar a editar info si es admin-->
+          <button class="btn-edit"  mat-fab [routerLink]="['/main/movie/edit', movie.titulo]"> <!--enviar a editar info si es admin-->
             <mat-icon>edit_note</mat-icon>
           </button>
-          <button class="btn-delete" mat-fab [routerLink]=""> <!--enviar a eliminar info si es admin-->
+          <button class="btn-delete" mat-fab (click)="deleteActor(movie.titulo)"> <!--enviar a eliminar info si es admin-->
             <mat-icon>delete</mat-icon>
           </button>
         }

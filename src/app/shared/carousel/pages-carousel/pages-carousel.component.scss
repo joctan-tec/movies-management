@@ -18,3 +18,10 @@
   /* Si deseas un espacio entre las tarjetas, puedes poner margen aquí */
   margin-right: 8px;
 }
+
+.images{
+  width: 100%; /* Hace que la imagen ocupe todo el ancho */
+  height: 150px; /* Altura fija para la imagen */
+  object-fit: contain;
+  border-radius: 25px;
+}

@@ -9,6 +9,10 @@ import { environment } from '../../../environments/environment.development';
 export class UserService {
 
   private baseUrl = environment.API_URL;
+  public headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  };
 
 
   constructor(
@@ -19,7 +23,12 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/users/new`, formData);
   }
 
-  login(formData : FormData): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/login`, formData);
+  login(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/login`, formData, { withCredentials: true });
+  }
+  
+
+  userInformation(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/auth/getUserInfo`, { withCredentials: true });
   }
 }
