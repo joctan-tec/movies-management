@@ -14,6 +14,7 @@ import { SpinerComponent } from "../../../shared/spiner/spiner.component";
 export class ActorsComponent {
 
   actors:Actor[]=[];
+  protected isAdmin!:boolean;
 
   constructor(
     private actorService:ActorService,
@@ -21,6 +22,11 @@ export class ActorsComponent {
   ){}
 
   ngOnInit(){
+    if(localStorage.getItem('role')==='false'){
+      this.isAdmin=false;
+    }else{
+      this.isAdmin=true;
+    }
     this.actorService.getAllActors()
       .subscribe(actors => {this.actors=actors; this.cdRef.detectChanges();})
   }

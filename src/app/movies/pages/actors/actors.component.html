@@ -1,7 +1,7 @@
 <div *ngIf="actors.length > 0; else noData">
   <div class="grid grid-flow-col grid-rows-2 gap-4 bg-[#2C3E50] h-screen">
     <div class="m-6 row-start-2 bg-[#2C3E50] mt-16">
-      <shared-galery [actors]="actors" [pageSize]="6"></shared-galery>
+      <shared-galery [actors]="actors" [pageSize]="6" [admin]="isAdmin"></shared-galery>
     </div>
   </div>
 </div>

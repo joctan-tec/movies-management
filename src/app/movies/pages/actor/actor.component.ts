@@ -31,11 +31,11 @@ export class ActorComponent {
 
   ngOnInit(){
     this.getActor();
-      if(localStorage.getItem('role')==='false'){
-        this.isAdmin=false;
-      }else{
-        this.isAdmin=true;
-      }
+    if(localStorage.getItem('role')==='false'){
+      this.isAdmin=false;
+    }else{
+      this.isAdmin=true;
+    }
   }
   getActor(){
     this.route.params.pipe(
