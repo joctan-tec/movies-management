@@ -52,6 +52,11 @@ export class MovieService {
     );
   }
 
-  deleteMovie(){}
+  deleteMovie(name:string):Observable<Movie>{
+    const body = { nombre: name };
+    return this.http.patch<{movie:Movie}>(`${this.url}/movies/delete`,body).pipe(
+      map((response) => response.movie)
+    );
+  }
 
 }

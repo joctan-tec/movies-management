@@ -65,12 +65,21 @@ export class CardComponent {
   }
 
   deleteMovie(MovieName:string){
-    //delete movie
-    //this.movieService.deleteActor(name).subscribe(response =>{
-   //   if(response.activo){
-   //     window.location.reload();
-   //   }
-   // });
+    const dialogRef =  this.dialog.open(ConfirmDialogComponent, {
+      data: MovieName
+    });
+
+    dialogRef.afterClosed()
+      .subscribe( (result) => {
+        if (!result) return;
+
+        this.movieService.deleteMovie(MovieName).subscribe(response =>{
+          if(response.activo){
+            window.location.reload();
+            this.snackbar.open(`Pelicula ${MovieName} eliminado!`, 'Cerrar',{duration:3000});
+          }
+        });
+      });
 
   }
 

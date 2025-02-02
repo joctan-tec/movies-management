@@ -36,7 +36,7 @@
           <button class="btn-edit"  mat-fab [routerLink]="['/main/movie/edit', movie.titulo]"> <!--enviar a editar info si es admin-->
             <mat-icon>edit_note</mat-icon>
           </button>
-          <button class="btn-delete" mat-fab (click)="deleteActor(movie.titulo)"> <!--enviar a eliminar info si es admin-->
+          <button class="btn-delete" mat-fab (click)="deleteMovie(movie.titulo)"> <!--enviar a eliminar info si es admin-->
             <mat-icon>delete</mat-icon>
           </button>
         }
