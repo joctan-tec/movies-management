@@ -1,4 +1,4 @@
-@if(movie && reparto && showReparto){
+@if(movie && reparto){
   <div class="grid grid-rows-[1fr, 1fr, 1fr, 1fr, 1fr] gap-y-24 bg-[#2C3E50] h-screen text-white">
     <!-- primera row -->
     <div class="bg-[#2C3E50] p-12 grid grid-cols-4 gap-4 place-items-center justify-items-center align-items-end">
@@ -39,13 +39,29 @@
 
     <!-- cuarta row -->
     <div class="bg-[#2C3E50] p-12 min-h-[400px]">
-      <h1 class="biography">Imágenes</h1>
+      <div class="flex">
+        <h1 class="biography">Imágenes</h1>
+        @if(isAdmin){
+          <button mat-fab class="ml-3">
+            <mat-icon>add</mat-icon>
+          </button>
+        }
+      </div>
+      <br>
       <shared-pages-carousel [imagenesMovies]="movie.imagenes"></shared-pages-carousel>
     </div>
 
       <!-- quinta row -->
     <div class="bg-[#2C3E50] p-12 min-h-[400px]">
-      <h1 class="biography">Reparto</h1>
+      <div class="flex">
+        <h1 class="biography">Reparto</h1>
+        @if(isAdmin){
+          <button mat-fab class="ml-3">
+            <mat-icon>add</mat-icon>
+          </button>
+        }
+      </div>
+      <br>
       <shared-pages-carousel [actors]="reparto"></shared-pages-carousel>
     </div>
 

@@ -21,7 +21,7 @@ export class ActorComponent {
   private actorName: string = '';
   protected actor!:Actor
   protected apariciones:Movie[]=[];
-  protected showApariciones!:boolean;
+  protected isAdmin!:boolean;
 
   constructor(
     private actorService:ActorService,
@@ -31,9 +31,11 @@ export class ActorComponent {
 
   ngOnInit(){
     this.getActor();
-    //setTimeout(() => {
-      this.showApariciones = true;
-    //}, 6000); // Retardo de 5 segundo para mostrar el reparto
+      if(localStorage.getItem('role')==='false'){
+        this.isAdmin=false;
+      }else{
+        this.isAdmin=true;
+      }
   }
   getActor(){
     this.route.params.pipe(

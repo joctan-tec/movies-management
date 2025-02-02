@@ -16,7 +16,7 @@ export class GaleryComponent {
   @Input() public movies: Movie[] = [];
   @Input() public actors: Actor[] = [];
 
-  public admin: boolean = true;
+  @Input() public admin: boolean = false;
 
   // Propiedades para paginación
   @Input() public pageSize = 4;

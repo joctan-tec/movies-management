@@ -5,6 +5,7 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../interfaces/models.interfaces';
 import { PagesCarouselComponent } from "../../../shared/carousel/pages-carousel/pages-carousel.component";
 import { switchMap } from 'rxjs/operators';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-movies',
@@ -17,13 +18,33 @@ export class MoviesComponent {
 
   protected movies:Movie[]=[];
   protected TopMovies:Movie[]=[];
+  protected userData:any;
+  protected isAdmin!:boolean;
 
 
   constructor(
-    private movieService:MovieService
+    private movieService:MovieService,
+    private _userService:UserService
   ){}
 
   ngOnInit() {
+    this._userService.userInformation().subscribe({
+      next: (user) => {
+        this.userData = user;
+        if(user.role==='User'){
+          this.isAdmin=false;
+          localStorage.setItem('role',"false");
+        }else{
+          this.isAdmin=true;
+          localStorage.setItem('role',"true");
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+
     this.movieService.getAllMovies()
       .pipe(
         switchMap(movies => {

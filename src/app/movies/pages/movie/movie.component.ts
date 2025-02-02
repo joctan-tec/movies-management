@@ -21,7 +21,7 @@ export class MovieComponent {
   protected movie!:Movie;
   private movieName: string = '';
   protected reparto:Actor[]=[];
-  protected showReparto!:boolean;
+  protected isAdmin!:boolean;
 
 
   constructor(
@@ -33,7 +33,11 @@ export class MovieComponent {
   ngOnInit() {
     this.getMovie();
     //setTimeout(() => {
-    this.showReparto = true;
+    if(localStorage.getItem('role')==='false'){
+      this.isAdmin=false;
+    }else{
+      this.isAdmin=true;
+    }
     //}, 6000); // Retardo de 5 segundo para mostrar el reparto
   }
 
