@@ -32,9 +32,9 @@ export class MovieComponent {
 
   ngOnInit() {
     this.getMovie();
-    setTimeout(() => {
-      this.showReparto = true;
-    }, 6000); // Retardo de 5 segundo para mostrar el reparto
+    //setTimeout(() => {
+    this.showReparto = true;
+    //}, 6000); // Retardo de 5 segundo para mostrar el reparto
   }
 
   getMovie() {
@@ -42,31 +42,25 @@ export class MovieComponent {
     this.route.params.pipe(
       switchMap(params => {
         this.movieName = params['name'];
-        return this.movieService.getMovieByName(this.movieName); // Hacer la solicitud para obtener la película
+        return this.movieService.getMovieByName(this.movieName); // Obtiene la película
       }),
       switchMap((movie) => {
         this.movie = movie;
 
-        // Creamos un observable secuencial para obtener los actores
-        // Usamos 'from' para convertir el array de actores en un flujo de observables
-        return from(this.movie.reparto).pipe(
-          concatMap(actorName =>
-            this.actorService.getActor(actorName).pipe(
-              tap(actor => {
-                this.reparto.push(actor);  // Agregar el actor al array
-              })
-            )
-          )
-        );
+        // Llamamos a buscarPeliculas con todo el reparto
+        return this.actorService.buscarActores(this.movie.reparto);
       })
     ).subscribe({
-      next: () => {},
+      next: (actores) => {
+        this.reparto = actores;  // Guardamos los actores devueltos
+      },
       error: (error) => {
-        console.error('Error al obtener la película o los actores:', error);
+        console.error('Error al obtener el reparto:', error);
       },
       complete: () => {
         console.log('Todos los actores han sido cargados.');
       }
     });
   }
+
 }

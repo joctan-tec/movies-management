@@ -21,6 +21,13 @@ export class MovieService {
     );
   }
 
+  buscarPeliculas(actores: string[]): Observable<Movie[]> {
+      const body = { peliculas: actores };  // Estructura correcta del cuerpo de la petición
+      return this.http.post<{ peliculas: Movie[] }>(`${this.url}/movies/actorMovies`, body).pipe(
+        map((response) => response.peliculas) // Extrae la propiedad 'peliculas' de la respuesta
+      );
+    }
+
   getMovieByName(name:string):Observable<Movie>{
     return this.http.get<{ movie: Movie }>(`${this.url}/movies/${name}`).pipe(
       map((response) => response.movie) // Extrae la propiedad 'movies' de la respuesta

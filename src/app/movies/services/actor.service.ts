@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment.development';
 })
 export class ActorService {
 
+
   private url:string = environment.API_URL
 
   constructor(
@@ -20,6 +21,14 @@ export class ActorService {
       map((response) => response.actors) // Extrae la propiedad 'actors' de la respuesta
     );
   }
+
+  buscarActores(peliculas: string[]): Observable<Actor[]> {
+    const body = { reparto: peliculas };  // Estructura correcta del cuerpo de la petición
+    return this.http.post<{ peliculas: Actor[] }>(`${this.url}/actors/movieActors`, body).pipe(
+      map((response) => response.peliculas) // Extrae la propiedad 'peliculas' de la respuesta
+    );
+  }
+
 
   getActor(name:string):Observable<Actor>{
     return this.http.get<{ actor: Actor }>(`${this.url}/actors/getOne/${name}`).pipe(
