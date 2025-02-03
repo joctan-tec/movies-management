@@ -1,14 +1,92 @@
+<div class="w-full space-y-3 justify-center">
+  <!-- Barra de búsqueda -->
+  <div>
+    <search-bar
+      (search)="onSearch($event)"
+      [searchQuery]="searchQuery"
+      [placeholder]="'¿Cuál película deseas buscar?'"
+      [searchCategories]="genders"
+      class="w-full"
+    ></search-bar>
+  </div>
 
-<!--agregar los filtros-->
-@if(movies.length>0 && TopMovies.length>0){
-  <shared-pages-carousel [movies]="TopMovies"></shared-pages-carousel>
-  <div class="grid grid-flow-col grid-rows-2 gap-4 bg-[#2C3E50] h-screen">
-    <div class="m-6 row-start-2 bg-[#2C3E50] mt-16">
+  <!-- Spinner de carga -->
+  <div class="flex flex-col items-center justify-center text-white my-5" *ngIf="isSearching">
+    <shared-spiner class="spiner"></shared-spiner>
+  </div>
+
+  <!-- Mensaje de no hay resultados -->
+  <div class="mb-10" *ngIf="filterForm.touched && searchResults.length === 0 && !isSearching">
+    <h2 class="text-center text-white text-3xl">No se encontraron películas con esos criterios</h2>
+  </div>
+
+  <!-- Formulario de filtros y resultados de búsqueda -->
+  <div *ngIf="searchResults.length > 0 && !isSearching">
+    <form class="w-full flex flex-col lg:flex-row gap-5 lg:justify-center items-center" [formGroup]="filterForm">
+      <div>
+        <mat-form-field class="w-full">
+          <mat-label>Filtrar por Género</mat-label>
+          <mat-select formControlName="genre">
+            @for (genre of genders; track $index) {
+              <mat-option [value]="genre">{{ genre }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="w-full">
+          <mat-label>Filtrar por Año</mat-label>
+          <mat-select formControlName="year">
+            @for (year of years; track $index) {
+              <mat-option [value]="year">{{ year }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="w-full">
+          <mat-label>Filtrar por Calificación</mat-label>
+          <mat-select formControlName="rating">
+            @for (rating of ratings; track $index) {
+              <mat-option [value]="rating">{{ rating }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="flex items-center justify-center">
+        <button mat-raised-button color="primary" (click)="onFilter()">Filtrar</button>
+        <button type="reset" mat-mini-fab aria-label="Reset">
+          <mat-icon>cleaning_services</mat-icon>
+        </button>
+      </div>
+    </form>
+
+    <h2 class="text-xl mb-5 text-white">
+      Resultados de la búsqueda: <span class="underline">{{ searchQuery }}</span>
+    </h2>
+
+    <shared-galery
+      [movies]="searchResults"
+      [pageSize]="pageSize"
+      [totalItems]="totalResults"
+      [useBackendPagination]="true"
+      (pageChange)="onPageChange($event)"
+    ></shared-galery>
+  </div>
+
+  <!-- Carrusel de películas destacadas -->
+  <div *ngIf="movies.length > 0 && TopMovies.length > 0">
+    <shared-pages-carousel [movies]="TopMovies"></shared-pages-carousel>
+    <div class="bg-[#2C3E50] m-6">
       <shared-galery [movies]="movies" [pageSize]="6"></shared-galery>
     </div>
   </div>
-}@else{
-  <div class="flex items-center justify-center h-screen text-white">
+
+  <!-- Spinner para carga inicial si no hay datos -->
+  <div *ngIf="movies.length === 0 && TopMovies.length === 0 && !isSearching" class="flex items-center justify-center text-white">
     <shared-spiner class="spiner"></shared-spiner>
   </div>
-}
+</div>
