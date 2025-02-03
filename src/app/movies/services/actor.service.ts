@@ -43,26 +43,13 @@ export class ActorService {
     );
   }
 
-  addActor(nombre:string, biografia:string, peliculas:string[], fechaDeNacimiento:string, imagenes:string[]):Observable<Actor>{
-    const body = {
-      nombre:nombre,
-      biografia: biografia,
-      fechaDeNacimiento: fechaDeNacimiento,
-      peliculas: peliculas,
-      imagenes: imagenes
-    }
-    return this.http.post<Actor>(`${this.url}/actors/create`,body)
+  addActor(formData : FormData):Observable<Actor>{
+    return this.http.post<Actor>(`${this.url}/actors/create`,formData)
   }
 
-  editActor(nombre:string, biografia:string, peliculas:string[], fechaDeNacimiento:string, imagenes:string[]):Observable<Actor>{
-    const body = {
-      nombre:nombre,
-      biografia: biografia,
-      fechaDeNacimiento: fechaDeNacimiento,
-      peliculas: peliculas,
-      imagenes: imagenes
-    }
-    return this.http.put<Actor>(`${this.url}/actors/update`,body)
+  editActor(formData : FormData, name : string):Observable<Actor>{
+    
+    return this.http.put<Actor>(`${this.url}/actors/update/${name}`,formData)
   }
 
   addImgInActor(nombre:string, imagenes:string[]):Observable<Actor>{

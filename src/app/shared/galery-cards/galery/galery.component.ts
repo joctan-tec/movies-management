@@ -37,6 +37,7 @@ export class GaleryComponent {
     if (this.useBackendPagination) {
       this.pageChange.emit(event);
     } else {
+      
       this.currentPageMovies = event.pageIndex;
       this.currentPageActors = event.pageIndex;
       this.pageSize = event.pageSize;

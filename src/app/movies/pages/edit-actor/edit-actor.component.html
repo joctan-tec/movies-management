@@ -1,1 +1,60 @@
-<p>edit-actor works!</p>
+<div class="w-full h-screen flex flex-col">
+    <h1 class="text-white text-3xl text-center">{{isEdit ? "Editar Actor/Actriz" : "Nuevo Actor/Actriz"}}</h1>
+    <form [formGroup]="actorForm" class="
+        grid 
+        grid-cols-1 md:grid-cols-2
+        gap-5
+        w-full md:w-10/12 lg:w-8/12
+        mx-auto justify-center mt-4">
+        <div class="w-full h-full space-y-3">
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Nombre</mat-label>
+                    <input placeholder="Escribe el nombre" matInput formControlName="nombre"
+                    
+                    />
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Biografia</mat-label>
+                    <textarea placeholder="Escribe la biografia" matInput type="text" formControlName="biografia"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechaDeNacimiento" [max]="maxDate" />
+                    <mat-hint style="color: #fff;">MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker [touchUi]="isMobile"  #picker></mat-datepicker>
+                    
+                </mat-form-field>
+            </div>  
+
+        </div>
+
+        <div class="w-full h-full">
+            <div>
+                <app-drop-file #dropFiles [config]="customConfig" (onFilesChange)="onFileSelected($event)"></app-drop-file>
+            </div>
+            
+        </div>
+
+
+
+        <div class="flex justify-center mt-5 mx-auto w-7/12">
+            <button mat-flat-button (click)="onSubmit()" style="
+                    background-color: #E74C3C80;
+                    color: #fff;
+                    width: 100%;
+                    font-size: 1.2rem;
+                    ">
+                Guardar
+            </button>
+        </div>
+
+    </form>
+</div>

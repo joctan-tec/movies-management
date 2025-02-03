@@ -45,12 +45,12 @@ export const routes: Routes = [
         component:ActorsComponent
       },
       {
-        path:"new-actor", //new actor
-        component:NewActorComponent
+        path:"actor/new", //new actor
+        component:EditActorComponent
       },
       {
-        path:"new-actor/:name", //edit actor
-        component:NewActorComponent
+        path:"actor/edit/:name", //edit actor
+        component:EditActorComponent
       },
       {
         path:"actors/:name", //info of one actor

@@ -11,7 +11,7 @@
           <mat-icon>info</mat-icon>
         </button>
         @if (admin) {
-          <button class="btn-edit" mat-fab [routerLink]="['/edit', actor.nombre]">
+          <button class="btn-edit" mat-fab [routerLink]="['/main/actor/edit', actor.nombre]">
             <mat-icon>edit_note</mat-icon>
           </button>
           <button class="btn-delete" mat-fab (click)="deleteActor(actor.nombre)">

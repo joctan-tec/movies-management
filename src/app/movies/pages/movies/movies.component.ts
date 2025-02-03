@@ -158,7 +158,14 @@ export class MoviesComponent {
 
 
   onPageChange(event: PageEvent) {
+    
     this.currentPage = event.pageIndex + 1;
+    // Si la pagina actual es mayor a la cantidad de paginas no avanza
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+      return;
+    }
+
     this.onSearch({
       search: this.searchQuery,
       selected: this.filterGenre || ''

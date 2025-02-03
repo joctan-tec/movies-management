@@ -1,5 +1,119 @@
-<div class="bg-[#2C3E50] flex flex-col p-5 md:p-5" >
-  <header></header>
-  <router-outlet></router-outlet>
-</div>
+<mat-sidenav-container style="background-color: #405973; color: white;">
+  <mat-sidenav mode="side" #sidenav style="background-color: #405973; color: white; height: 100%;">
+    <!-- Boton de cerrar -->
+    <button mat-icon-button (click)="sidenav.toggle()" class="text-white" style="margin-top: 1rem; display: flex; width: 100%; justify-content: end;">
+      <mat-icon class="text-white" >close</mat-icon>
+    </button>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem;">
+      <a routerLink="/main/movies" 
+         routerLinkActive="active" 
+         [routerLinkActiveOptions]="{ exact: true }" 
+         style="color: white;"
+         class="menu-item rounded-full"
+         
+         >Películas</a>
+      
+      <a routerLink="/main/actors" 
+         routerLinkActive="active" 
+         [routerLinkActiveOptions]="{ exact: true }" 
+         style="color: white;"
+         class="menu-item rounded-full">Actores</a>
+      @if (userData.role === "Admin") {
+        <a routerLink="/main/movie/new" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{ exact: true }" 
+        style="color: white;"
+        class="menu-item rounded-full">Nueva Película</a>
+     
+        <a routerLink="/main/actor/new" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{ exact: true }" 
+        style="color: white;"
+        class="menu-item rounded-full">Nuevo Actor</a>
+      }
+
+    </div>
+
+    <div style="width: 100%; display: flex; justify-self: end; justify-content: center; align-items: center;" class="menu-item rounded-full">
+      <a routerLink="/auth" style="color: white; display: flex; justify-self: end; justify-content: center; align-items: center; gap: 1rem;">Cerrar Sesión
+        <mat-icon>logout</mat-icon>
+      </a>
+    </div>
+
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <mat-toolbar style="background-color: #405973; color: white;">
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+        <div style="display: flex; align-items: center;">
+          <button (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon class="text-white">menu</mat-icon>
+          </button>
+          <span class="text-white">IMDB Chafa</span>
+        </div>
+
+        <div class="navMenu">
+          <a routerLink="/main/movies" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{ exact: true }" 
+             style="color: white;"
+             class="menu-item rounded-full"
+             
+             >Películas</a>
+          
+          <a routerLink="/main/actors" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{ exact: true }" 
+             style="color: white;"
+             class="menu-item rounded-full">Actores</a>
+          @if (userData.role === "Admin") {
+            <a routerLink="/main/movie/new" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{ exact: true }" 
+            style="color: white;"
+            class="menu-item rounded-full">Nueva Película</a>
+         
+            <a routerLink="/main/actor/new" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{ exact: true }" 
+            style="color: white;"
+            class="menu-item rounded-full">Nuevo Actor</a>
+          }
+    
+        </div>
+
+        <!-- Profile -->
+        <div style="display: flex; align-items: center; gap: 1rem;" [matMenuTriggerFor]="menu">
+          <span>
+            {{userData.username || userData.email}}
+          </span>
+          <img [src]="userData.picture" alt="no-picture" width="50" height="50" class="rounded-full">
+
+        </div>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <a routerLink="/auth" style="color: black; display: flex; align-items: center; gap: 1rem;">Cerrar Sesión
+              <mat-icon>logout</mat-icon>
+            </a>
+          </button>
+        </mat-menu>
+
+      </div>
+     
+      
+      
+      
+    </mat-toolbar> 
+    <div class="bg-[#2C3E50] flex flex-col p-5 md:p-5" >
+  
+      
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
 

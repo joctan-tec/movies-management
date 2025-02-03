@@ -1,0 +1,26 @@
+.active {    
+    background: #354c65;
+}
+
+.menu-item {
+    padding: 1rem;
+    color: white;
+    text-decoration: none;
+    transition: ease-in-out 0.2s;
+}
+
+.menu-item:hover {
+    background: #354c65;
+}
+
+.navMenu{
+    display: none;
+}
+
+@media screen and (min-width: 929px) {
+    .navMenu {
+        display: flex;
+        padding: 0.5rem;
+    }
+    
+}
