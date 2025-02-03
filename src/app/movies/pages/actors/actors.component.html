@@ -1,13 +1,64 @@
-<div *ngIf="actors.length > 0; else noData">
-  <div class="grid grid-flow-col grid-rows-2 gap-4 bg-[#2C3E50] h-screen">
-    <div class="m-6 row-start-2 bg-[#2C3E50] mt-16">
-      <shared-galery [actors]="actors" [pageSize]="6" [admin]="isAdmin"></shared-galery>
-    </div>
+<div class="w-full space-y-3 justify-center">
+  <!-- Barra de búsqueda -->
+  <div>
+    <search-bar
+      (search)="onSearch($event)"
+      [searchQuery]="searchQuery"
+      [placeholder]="'¿Qué actor deseas buscar?'"
+      [noFilter]="true"
+      class="w-full"
+    ></search-bar>
   </div>
-</div>
 
-<ng-template #noData>
-  <div class="flex items-center justify-center h-screen text-white">
+  <!-- Spinner de carga -->
+  <div class="flex flex-col items-center justify-center text-white my-5" *ngIf="isSearching">
     <shared-spiner class="spiner"></shared-spiner>
   </div>
-</ng-template>
+
+  <!-- Mensaje de no hay resultados -->
+  <div class="mb-10" *ngIf="searchResults.length === 0 && !isSearching && existSearch">
+    <h2 class="text-center text-white text-3xl">No se encontraron actores con esos criterios</h2>
+  </div>
+
+  <!-- Formulario de filtros y resultados de búsqueda -->
+  <div *ngIf="searchResults.length > 0 && !isSearching">
+
+    <h2 class="text-xl mb-5 text-white">
+      Resultados de la búsqueda: <span class="underline">{{ searchQuery }}</span>
+    </h2>
+
+    <shared-galery
+      [actors]="searchResults"
+      [pageSize]="pageSize"
+      [totalItems]="totalResults"
+      [useBackendPagination]="true"
+      (pageChange)="onPageChange($event)"
+      [admin]="isAdmin"
+    ></shared-galery>
+  </div>
+
+
+
+    <!-- Galería principal de actores -->
+    <div *ngIf="actors.length > 0; else noData">
+      <div class="bg-[#2C3E50]">
+        <div class="m-6 row-start-2 bg-[#2C3E50] mt-16">
+          <shared-galery [actors]="actors" [pageSize]="6" [admin]="isAdmin"></shared-galery>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Spinner para carga inicial si no hay datos -->
+    <ng-template #noData>
+      <div class="flex items-center justify-center h-screen text-white">
+        <shared-spiner class="spiner"></shared-spiner>
+      </div>
+    </ng-template>
+
+
+
+
+
+  
+</div>
+

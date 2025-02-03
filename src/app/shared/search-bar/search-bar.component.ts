@@ -36,6 +36,7 @@ export class SearchBarComponent {
     {value: 'movies', viewValue: 'Movies'},
     {value: 'actors', viewValue: 'Actors'}
   ]
+  @Input() noFilter = false;
 
   @Output() search: EventEmitter<SearchForm> = new EventEmitter<SearchForm>();
 
@@ -51,7 +52,6 @@ export class SearchBarComponent {
     ngOnInit() {
       // Set the default value of the select
       this.categories = this.searchCategories.map(category => ({ value: category, viewValue: category }));
-      console.log(this.searchCategories);
       this.searchForm.patchValue({ selected: this.categories[0].value });
       
     }

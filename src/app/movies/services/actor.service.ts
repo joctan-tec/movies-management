@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Actor } from '../interfaces/models.interfaces';
@@ -27,6 +27,20 @@ export class ActorService {
     return this.http.post<{ peliculas: Actor[] }>(`${this.url}/actors/movieActors`, body).pipe(
       map((response) => response.peliculas) // Extrae la propiedad 'peliculas' de la respuesta
     );
+  }
+
+  searchActors(
+    searchText: string = '',
+    page: number = 1,
+    limit: number = 10
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+  
+    if (searchText) params = params.set('searchText', searchText);
+  
+    return this.http.get<any>(`${this.url}/actors/search`, { params });
   }
 
 
