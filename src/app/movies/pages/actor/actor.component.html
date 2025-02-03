@@ -20,11 +20,6 @@
 
       <div class="flex">
         <h1 class="biography">Imágenes</h1>
-        @if(isAdmin){ <!-- si es admin -->
-          <button mat-fab class="ml-3">
-            <mat-icon>add</mat-icon>
-          </button>
-        }
       </div>
       <br>
       <shared-pages-carousel [imagenes]="actor.imagenes"></shared-pages-carousel>
@@ -33,11 +28,6 @@
     <div class="bg-[#2C3E50] p-4">
       <div class="flex">
         <h1 class="biography">Apariciones</h1>
-        @if(isAdmin){
-          <button mat-fab class="ml-3">
-            <mat-icon>add</mat-icon>
-          </button>
-        }
       </div>
       <br>
       <shared-pages-carousel [movies]="apariciones"></shared-pages-carousel>

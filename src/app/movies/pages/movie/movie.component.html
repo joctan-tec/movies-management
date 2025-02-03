@@ -41,11 +41,6 @@
     <div class="bg-[#2C3E50] p-12 min-h-[400px]">
       <div class="flex">
         <h1 class="biography">Imágenes</h1>
-        @if(isAdmin){
-          <button mat-fab class="ml-3">
-            <mat-icon>add</mat-icon>
-          </button>
-        }
       </div>
       <br>
       <shared-pages-carousel [imagenesMovies]="movie.imagenes"></shared-pages-carousel>
@@ -55,11 +50,6 @@
     <div class="bg-[#2C3E50] p-12 min-h-[400px]">
       <div class="flex">
         <h1 class="biography">Reparto</h1>
-        @if(isAdmin){
-          <button mat-fab class="ml-3">
-            <mat-icon>add</mat-icon>
-          </button>
-        }
       </div>
       <br>
       <shared-pages-carousel [actors]="reparto"></shared-pages-carousel>

@@ -32,7 +32,7 @@ export class MoviesComponent {
   protected userData:any;
   protected isAdmin!:boolean;
 
-  
+
 
   searchQuery: string = '';
   filterGenre: string | undefined = undefined;
@@ -61,6 +61,24 @@ export class MoviesComponent {
 
   ngOnInit() {
 
+    this._userService.userInformation().subscribe({
+      next: (user) => {
+        this.userData = user;
+        if(user.role==='User'){
+          this.isAdmin=false;
+          localStorage.setItem('role',"false");
+          console.log('epep ',this.isAdmin);
+        }else{
+          this.isAdmin=true;
+          localStorage.setItem('role',"true");
+          console.log('epep ',this.isAdmin);
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
           // Info = { generos: string[], años_lanzamiento: number[], calificaciones: number[] }
     // Set the default value of the select
     this.movieService.getMoviesInfo().subscribe({
@@ -79,23 +97,6 @@ export class MoviesComponent {
     });
 
 
-    this._userService.userInformation().subscribe({
-      next: (user) => {
-        this.userData = user;
-        if(user.role==='User'){
-          this.isAdmin=false;
-          localStorage.setItem('role',"false");
-        }else{
-          this.isAdmin=true;
-          localStorage.setItem('role',"true");
-        }
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-
-
 
     this.movieService.getAllMovies()
       .pipe(
@@ -110,7 +111,7 @@ export class MoviesComponent {
 
 
 
-    
+
 
   };
 
@@ -129,12 +130,12 @@ export class MoviesComponent {
     }else{
       this.filterGenre = seachForm.selected;
       this.filterForm.patchValue({ genre: seachForm.selected });
-    }   
+    }
     this.filterYear = this.filterForm.get('year')?.value;
     this.filterRating = this.filterForm.get('rating')?.value;
 
     console.log(this.searchQuery, this.filterGenre, this.filterYear, this.filterRating);
-  
+
     this.movieService.searchMovies(this.searchQuery, this.filterGenre, this.filterYear, this.filterRating, this.currentPage, this.pageSize)
       .subscribe({
         next: (response) => {
@@ -153,12 +154,12 @@ export class MoviesComponent {
         }
       });
   }
-  
+
 
 
 
   onPageChange(event: PageEvent) {
-    
+
     this.currentPage = event.pageIndex + 1;
     // Si la pagina actual es mayor a la cantidad de paginas no avanza
     if (this.currentPage > this.totalPages) {

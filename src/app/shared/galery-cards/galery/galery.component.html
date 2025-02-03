@@ -1,7 +1,7 @@
 <div *ngIf="movies.length > 0" class="bg-[#2C3E50] w-full justify-center">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl: justify-center">
     <ng-container *ngFor="let movie of (useBackendPagination ? movies : paginatedMovies)" >
-      <shared-card class="p-2 justify-self-center" [movie]="movie" [admin]="true"></shared-card>
+      <shared-card class="p-2 justify-self-center" [movie]="movie" [admin]="admin"></shared-card>
     </ng-container>
   </div>
 
@@ -15,7 +15,7 @@
 <div *ngIf="actors.length > 0" class="bg-[#2C3E50]">
   <div class="grid grid-cols-3 gap-4 justify-items-stretch">
     <ng-container *ngFor="let actor of (useBackendPagination ? actors : paginatedActors)">
-      <shared-card class="w-64 h-76 p-1" [actor]="actor" [admin]="true"></shared-card>
+      <shared-card class="w-64 h-76 p-1" [actor]="actor" [admin]="admin"></shared-card>
     </ng-container>
   </div>
 
