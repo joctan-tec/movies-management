@@ -20,6 +20,7 @@ export class GaleryComponent {
   @Input() public useBackendPagination: boolean = false;
 
   @Output() public pageChange = new EventEmitter<PageEvent>();
+  @Input() public admin: boolean = false;
 
   protected currentPageMovies = 0;
   protected currentPageActors = 0;

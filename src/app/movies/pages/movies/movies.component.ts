@@ -15,7 +15,7 @@ import { switchMap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent, SearchForm } from '../../../shared/search-bar/search-bar.component';
 import { PageEvent } from '@angular/material/paginator';
-
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-movies',
@@ -28,6 +28,10 @@ export class MoviesComponent {
 
   protected movies:Movie[]=[];
   protected TopMovies:Movie[]=[];
+
+  protected userData:any;
+  protected isAdmin!:boolean;
+
   
 
   searchQuery: string = '';
@@ -47,7 +51,7 @@ export class MoviesComponent {
 
   filterForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private movieService: MovieService) {
+  constructor(private fb: FormBuilder, private movieService: MovieService, private _userService:UserService) {
       this.filterForm = this.fb.group({
         genre: [''],
         year: [''],
@@ -73,6 +77,24 @@ export class MoviesComponent {
         console.log(error);
       }
     });
+
+
+    this._userService.userInformation().subscribe({
+      next: (user) => {
+        this.userData = user;
+        if(user.role==='User'){
+          this.isAdmin=false;
+          localStorage.setItem('role',"false");
+        }else{
+          this.isAdmin=true;
+          localStorage.setItem('role',"true");
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
 
 
     this.movieService.getAllMovies()

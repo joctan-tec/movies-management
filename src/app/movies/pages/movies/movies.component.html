@@ -74,6 +74,7 @@
       [totalItems]="totalResults"
       [useBackendPagination]="true"
       (pageChange)="onPageChange($event)"
+      [admin]="isAdmin"
     ></shared-galery>
   </div>
 
@@ -81,7 +82,7 @@
   <div *ngIf="movies.length > 0 && TopMovies.length > 0">
     <shared-pages-carousel [movies]="TopMovies"></shared-pages-carousel>
     <div class="bg-[#2C3E50] m-6">
-      <shared-galery [movies]="movies" [pageSize]="6"></shared-galery>
+      <shared-galery [movies]="movies" [pageSize]="6" [admin]="isAdmin"></shared-galery>
     </div>
   </div>
 
